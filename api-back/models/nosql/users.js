@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const mongoseDelete = require("mongoose-delete");
 const UserScheme = new mongoose.Schema(
   {
     name: {
@@ -14,6 +14,7 @@ const UserScheme = new mongoose.Schema(
     },
     password: {
       type: String,
+      select: false,
     },
     role: {
       type: ["user", "admin"],
@@ -26,4 +27,5 @@ const UserScheme = new mongoose.Schema(
 );
 
 // TODO se exporta el esquema, nombre del esquema "users"
+UserScheme.plugin(mongoseDelete, { overrideMethods: "all" });
 module.exports = mongoose.model("users", UserScheme);

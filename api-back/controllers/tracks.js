@@ -7,9 +7,10 @@ const { handleHttpError } = require("../utils/handleError");
 /** Obtener lista de la base de datos */
 const getItems = async (req, res) => {
   try {
+    const user = req.user;
     const data = await tracksModel.find({});
 
-    res.send(data);
+    res.send({ data, user });
   } catch (e) {
     handleHttpError(res, "ERROR_GET_ITEMS");
   }
